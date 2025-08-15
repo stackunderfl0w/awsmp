@@ -58,12 +58,12 @@ def entity_list(entity_type, filter_visibility):
     List available entities. Currently supported are entities of type "Offer"
     and "AmiProduct".
     """
-    entity_list = _driver.list_entities(entity_type)
+    entity_list = _driver.list_entities_filtered(entity_type, filter_visibility)
+
     t = prettytable.PrettyTable()
     t.field_names = ["entity-id", "name", "visibility", "last-changed"]
-    for _, entity in entity_list.items():
-        if not filter_visibility or entity["Visibility"] in filter_visibility:
-            t.add_row([entity["EntityId"], entity["Name"], entity["Visibility"], entity["LastModifiedDate"]])
+    t.add_rows([[e["EntityId"], e["Name"], e["Visibility"], e["LastModifiedDate"]] for e in entity_list])
+
     print(t.get_string(sortby="last-changed"))
 
 

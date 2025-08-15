@@ -227,6 +227,11 @@ def list_entities(entity_type: str) -> dict[str, dict[str, str]]:
     return entities
 
 
+def list_entities_filtered(entity_type: str, visibilities: tuple[str, ...]) -> list[dict]:
+    entities = list_entities(entity_type)
+    return [e for e in entities.values() if not visibilities or e["Visibility"] in visibilities]
+
+
 def get_entity_details(entity_id: str) -> Dict:
     client = get_client()
     try:

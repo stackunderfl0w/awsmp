@@ -116,7 +116,7 @@ def entity_get_diff(entity_id: str, config: TextIO):
         yaml_config = yaml.safe_load(f)
     local_config_entity = models.EntityModel.get_entity_from_yaml(yaml_config)
 
-    diff=_driver.diff_entity_id_vs_local(entity_id, local_config_entity)
+    diff = _driver.diff_entity_id_vs_local(entity_id, local_config_entity)
 
     print(repr(diff))
 

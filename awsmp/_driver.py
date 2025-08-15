@@ -241,6 +241,7 @@ def get_entity_details(entity_id: str) -> Dict:
 
     return e["DetailsDocument"]
 
+
 def get_ami_product_versions_count() -> list[tuple[str, int, str]]:
     """
     Query a list each marketplace entry with its number of versions.
@@ -251,6 +252,7 @@ def get_ami_product_versions_count() -> list[tuple[str, int, str]]:
         for entity_id in entity_dict.keys()
     ]
     return versions
+
 
 def get_public_offer_id(entity_id: str):
     client = get_client()
@@ -436,6 +438,7 @@ def _get_existing_instance_types(product_id: str):
         existing_instance_types = {t["Name"] for t in entity["Dimensions"]}
     return existing_instance_types
 
+
 def get_available_instance_types(arch: str, virt: str) -> list[str]:
     """
     Return available EC2 instance types for the given arch/virt.
@@ -461,6 +464,7 @@ def get_available_instance_types(arch: str, virt: str) -> list[str]:
     available_instances = [i["InstanceType"] for i in e["InstanceTypes"]]
 
     return available_instances
+
 
 def _filter_instance_types(product_id: str, changeset):
     existing_instance_types = _get_existing_instance_types(product_id)
@@ -570,5 +574,3 @@ def diff_entity_id_vs_local(entity_id: str, local_entity: models.EntityModel):
     diff = entity_from_listing.get_diff(local_entity)
 
     return diff
-
-
